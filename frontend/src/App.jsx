@@ -9,20 +9,20 @@ function App() {
   const [priority, setPriority] = useState("medium");
 
   const loadTasks = async () => {
-    const response = await fetch("/api/api/tasks");
+    const response = await fetch("http://localhost:5000/api/tasks");
     const data = await response.json();
     setTasks(data);
   };
 
   const loadRobots = async () => {
-    const response = await fetch("/api/api/robots");
+    const response = await fetch("http://localhost:5000/api/robots");
     const data = await response.json();
     setRobots(data);
   };
   const addRobot = async () => {
   if (!robotName.trim()) return;
 
-  await fetch("/api/api/robots", {
+  await fetch("http://localhost:5000/api/robots", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -41,7 +41,7 @@ function App() {
   const addTask = async () => {
     if (!description.trim()) return;
 
-    await fetch("/api/api/tasks", {
+    await fetch("http://localhost:5000/api/tasks", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -57,7 +57,7 @@ function App() {
     loadTasks();
   };
 const assignTask = async (taskId, robotId) => {
-  await fetch(`/api/tasks/${taskId}/assign`, {
+  await fetch(`http://localhost:5000/api/tasks/${taskId}/assign`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
@@ -69,7 +69,7 @@ const assignTask = async (taskId, robotId) => {
   loadRobots();
 };
 const scheduleTask = async (taskId, scheduledTime) => {
-  await fetch(`/api/tasks/${taskId}/schedule`, {
+  await fetch(`http://localhost:5000/api/tasks/${taskId}/schedule`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
@@ -322,11 +322,11 @@ const scheduleTask = async (taskId, scheduledTime) => {
           <button
             onClick={async () => {
               await fetch(
-                `/api/tasks/${task.id}/complete`,
-                {
-                  method: "PUT",
-                }
-              );
+  `http://localhost:5000/api/tasks/${task.id}/complete`,
+  {
+    method: "PUT",
+  }
+);
 
               loadTasks();
               loadRobots();
